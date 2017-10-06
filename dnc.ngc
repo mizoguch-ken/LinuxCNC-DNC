@@ -1,0 +1,20 @@
+(-- Initial Settings --)
+#5161 = [#<_ini[axis_0]home>]
+#5162 = [#<_ini[axis_1]home>]
+#5163 = [#<_ini[axis_2]home>]
+
+(-- Functions --)
+(Tool Change)
+o9000 sub
+    t#<_dnc_t> m6
+o9000 endsub [1.0]
+
+(-- DNC --)
+m999 p[#<_ini[dnc]port>] r[#<_ini[dnc]baudrate>] s[#<_ini[dnc]stopbits>] h[#<_ini[dnc]readahead>]
+o <dnc_loop> do
+    m999
+    o <dnc_func> if [#<_dnc_func>]
+        o #<_dnc_func> call
+    o <dnc_func> endif
+o <dnc_loop> while [#<_value>]
+m2
